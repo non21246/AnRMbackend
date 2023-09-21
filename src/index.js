@@ -5,10 +5,6 @@ const authRoutes = require('./routes/auth.js');
 const userRoutes = require('./routes/users.js');
 const db = require("./configs/db.js");
 
-app.get('/', (req, res)=>{
-    res.send(400);
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
