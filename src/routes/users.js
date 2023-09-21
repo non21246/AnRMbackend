@@ -5,9 +5,9 @@ router.get('/', (req, res) => {
   res.status(200).send('Welcome to the users API');
 });
 
-router.get('/users', users.getAll);
-router.get('/users/:id', users.getById);
-router.patch('/users/:id', users.updateById);
-router.delete('/users/:id', users.deleteById);
+router.get('/users', users.getAllUsers);
+router.get('/users/:id', users.getUserById);
+router.patch('/users/:id', users.updateUserById);
+router.delete('/users/:id', users.deleteUserById);
 
 module.exports = router;
