@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const users = require("../controllers/users.js");
+const users = require('../controllers/users.js');
 
-router.get('/', (req, res)=>{
-    res.send(400);
+router.get('/', (req, res) => {
+  res.status(200).send('Welcome to the users API');
 });
+
 router.get('/users', users.getAll);
 router.get('/users/:id', users.getById);
 router.patch('/users/:id', users.updateById);
