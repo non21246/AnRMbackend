@@ -4,10 +4,30 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const userSchema = new Schema({
+    fisrtname: {
+        type: String,
+        required: [true, "Firstname can't be empty!"]
+    },
+    lastname: {
+        type: String,
+        required: [true, "Lastname can't be empty!"]
+    },
+    faculty: {
+        type: String,
+        required: [true, "Faculty can't be empty!"]
+    },
+    major: {
+        type: String,
+        required: [true, "Major can't be empty!"]
+    },
+    phone: {
+        type: String,
+        required: [true, "Phone can't be empty!"]
+    },
     email: {
         type: String,
         lowercase: true,
-        required: [true, "Email can't be empty!"],
+        required: true,
         match: [
             /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
             "Email format is not correct!"
@@ -17,6 +37,10 @@ const userSchema = new Schema({
     password:{
         type: String,
         required: [true, "Password can't be empty!"]
+    },
+    userLevel: {
+        type: String,
+        required: true
     }
 },{timestamps: true});
 
