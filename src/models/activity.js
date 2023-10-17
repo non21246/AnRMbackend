@@ -1,42 +1,37 @@
 const db = require("../configs/db.js");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const activitySchema = new Schema({
-    name: {
-        Type: String,
+    title: {
+        type: String,
         required: true
     },
     type: {
-        Type: String,
+        type: String,
         required: true
     },
-    startDate: {
-        Type: Date,
+    place:{
+        type: String,
         required: true
     },
-    endDate: {
-        Type: Date,
+    start: {
+        type: Date,
+        required: true
+    },
+    end: {
+        type: Date,
         required: true
     },
     organizer: {
-        Type: String,
+        type: String,
         required: true
     },
     description: {
-        Type: String,
+        type: String,
         required: true
-    },
-    minUser: {
-        Type: Number,
-        default: 0
-    },
-    maxUser: {
-        Type: Number,
-        required: true
-    },
+    }
 },{timestamps: true});
 
-const ActivityModel = db.model('user', activitySchema);
+const ActivityModel = db.model('activity', activitySchema);
 module.exports = ActivityModel;
