@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
-const connnection = mongoose.createConnection(`mongodb+srv://nbu:nbu65@cluster0.glerzu7.mongodb.net/AnRM`).on('open', () => {
+const connnection = mongoose.createConnection(`mongodb+srv://nbu:nbu65@cluster0.glerzu7.mongodb.net/AnRM`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).on('open', () => {
     console.log('Database Connected');
 }).on('error', () => {
     console.log(501);

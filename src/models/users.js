@@ -33,18 +33,31 @@ const userSchema = new Schema({
         type: String,
         required: true,
         enum: ["High", "Medium", "Low"]
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [
+            /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+            "Email format is not correct!"
+        ],
+    },
+    password: {
+        type: String,
+        required: true
     }
 },{timestamps: true});
 
-// userSchema.pre("save", async function(){
-//     var user = this;
-//     try {
-//         const salt = await bcrypt.genSalt(10);
-//         const hash = await bcrypt.hash(user.password, salt);
-//         user.password = hash;
-//     } catch (error) {
-//         throw error;
-//     }
-// });
+userSchema.pre("save", async function(){
+    var user = this;
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(user.password, salt);
+        user.password = hash;
+    } catch (error) {
+        throw error;
+    }
+});
 const userModel = db.model('user', userSchema);
 module.exports = userModel;

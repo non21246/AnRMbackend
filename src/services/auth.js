@@ -1,37 +1,34 @@
-const UserModel = require('../models/users.js')
+const userModel = require('../models/users.js');
 const bcrypt = require('bcrypt');
 
-class AuthService{
-    static async loginUser(email, password) {
-        try {
-            const user = await UserModel.findOne({ email });
-            if (!user) {
-                throw new Error("Email not found");
-            }
-
-            const isPasswordValid = await bcrypt.compare(password, user.password);
-            if (!isPasswordValid) {
-                throw new Error("Passwords is incorrect");
-            }
-
-            return user;
-        } catch (error) {
-            throw error;
-        }
+class UserService {
+  async registerUser(userData) {
+    try {
+      const user = new userModel(userData);
+      await user.save();
+      return user;
+    } catch (error) {
+      throw error;
     }
-    static async registerUser(email, password){
-        try {
-            const existingUser = await UserModel.findOne({ email });
-            if (existingUser) {
-                throw new Error("Email already registered");
-            }
-            
-            const createUser = new UserModel({email, password});
-            return createUser.save();
-        } catch (error) {
-            throw error;
-        }
+  }
+
+  async loginUser(email, password) {
+    try {
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        return null;
+      }
+
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (isPasswordMatch) {
+        return user;
+      }
+
+      return null;
+    } catch (error) {
+      throw error;
     }
+  }
 }
 
-module.exports = AuthService;
+module.exports = new UserService();

@@ -1,14 +1,5 @@
 const userModel = require('../models/users.js');
 class UserService {
-    async createUser(userData) {
-      try {
-        const newUser = new userModel(userData);
-        const savedUser = await newUser.save();
-        return savedUser;
-      } catch (error) {
-        throw error;
-      }
-    }
   
     async getUsers() {
       try {
